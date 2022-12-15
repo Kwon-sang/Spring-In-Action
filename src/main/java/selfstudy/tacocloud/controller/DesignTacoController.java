@@ -54,7 +54,7 @@ public class DesignTacoController {
     @PostMapping
     public String processDesign(Taco design) {
         /* 여기서 타코디자인(선택된 식자재 내역)을 저장 */
-        log.info("Process Design : {}", design);
+        log.info("[log] Process Design : {}", design);
         return "redirect:/orders/current";
     }
 }

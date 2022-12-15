@@ -10,7 +10,7 @@
   <form method="post" th:action="@{/orders}" th:object="${order}">
     <h1>Order your taco creations!</h1>
     <img th:src="@{/images/TacoCloud.jpg}" width="500"/>
-    <a href="@{/design}" id="another">Design another taco</a><br/>
+    <a th:href="@{/design}" id="another">Design another taco</a><br/>
 
     <div th:if="${#fields.hasErrors()}">
       <span class="validationError">
@@ -20,31 +20,31 @@
 
     <h3>Deliver my taco masterpiece to...</h3>
 
-    <label for="deliveryName">Name : </label>
-    <input type="text" th:field="*{deliveryName}"><br/>
+    <label th:for="deliveryName">Name : </label>
+    <input th:type="text" th:field="*{deliveryName}"><br/>
 
-    <label for="deliveryStreet">Street address : </label>
+    <label th:for="deliveryStreet">Street address : </label>
     <input type="text" th:field="*{deliveryStreet}"><br/>
 
-    <label for="deliveryCity">City : </label>
+    <label th:for="deliveryCity">City : </label>
     <input type="text" th:field="*{deliveryCity}"><br/>
 
-    <label for="deliveryState">State : </label>
+    <label th:for="deliveryState">State : </label>
     <input type="text" th:field="*{deliveryState}"><br/>
 
-    <label for="deliveryZip">Zip : </label>
+    <label th:for="deliveryZip">Zip : </label>
     <input type="text" th:field="*{deliveryZip}"><br/>
 
 
     <h3>Here's how I'll pay...</h3>
 
-    <label for="ccNumber">Credit Card # :</label>
+    <label th:for="ccNumber">Credit Card # :</label>
     <input type="text" th:field="*{ccNumber}"><br/>
 
-    <label for="ccExpiration">Expiration : </label>
+    <label th:for="ccExpiration">Expiration : </label>
     <input type="text" th:field="*{ccExpiration}"><br/>
 
-    <label for="ccCVV">CVV : </label>
+    <label th:for="ccCVV">CVV : </label>
     <input type="text" th:field="*{ccCVV}"><br/>
 
     <input type="submit" value="Submit order">

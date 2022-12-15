@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import selfstudy.tacocloud.domain.Order;
 
 @Slf4j
 @RequestMapping("/orders")
@@ -18,9 +19,9 @@ public class OrderController {
         return "orderForm";
     }
 
-    @PostMapping("/orders")
+    @PostMapping
     public String processOrder(Order order) {
-        log.info("Order submitted : {}", order);
+        log.info("[log] Order submitted : {}", order);
         return "redirect:/";
     }
 }
