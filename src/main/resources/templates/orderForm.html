@@ -21,31 +21,42 @@
     <h3>Deliver my taco masterpiece to...</h3>
 
     <label th:for="deliveryName">Name : </label>
-    <input th:type="text" th:field="*{deliveryName}"><br/>
+    <input th:type="text" th:field="*{deliveryName}">
+    <span class="validationError" th:errors="*{deliveryName}">Delivery Name Error</span><br/>
+
 
     <label th:for="deliveryStreet">Street address : </label>
-    <input type="text" th:field="*{deliveryStreet}"><br/>
+    <input type="text" th:field="*{deliveryStreet}">
+    <span class="validationError" th:errors="*{deliveryStreet}">Delivery City Error</span><br/>
+
 
     <label th:for="deliveryCity">City : </label>
-    <input type="text" th:field="*{deliveryCity}"><br/>
+    <input type="text" th:field="*{deliveryCity}">
+    <span class="validationError" th:errors="*{deliveryCity}">Delivery City Error</span><br/>
 
     <label th:for="deliveryState">State : </label>
-    <input type="text" th:field="*{deliveryState}"><br/>
+    <input type="text" th:field="*{deliveryState}">
+    <span class="validationError" th:errors="*{deliveryState}">Delivery State Error</span><br/>
 
     <label th:for="deliveryZip">Zip : </label>
-    <input type="text" th:field="*{deliveryZip}"><br/>
+    <input type="text" th:field="*{deliveryZip}">
+    <span class="validationError" th:errors="*{deliveryZip}">Delivery Zip Error</span><br/>
 
 
     <h3>Here's how I'll pay...</h3>
 
     <label th:for="ccNumber">Credit Card # :</label>
-    <input type="text" th:field="*{ccNumber}"><br/>
+    <input type="text" th:field="*{ccNumber}"/>
+    <span class="validationError" th:errors="*{ccNumber}">CC Num Error</span><br/>
 
     <label th:for="ccExpiration">Expiration : </label>
-    <input type="text" th:field="*{ccExpiration}"><br/>
+    <input type="text" th:field="*{ccExpiration}">
+    <span class="validationError" th:errors="*{ccExpiration}">CC Expiration Error</span><br/>
+
 
     <label th:for="ccCVV">CVV : </label>
-    <input type="text" th:field="*{ccCVV}"><br/>
+    <input type="text" th:field="*{ccCVV}">
+    <span class="validationError" th:errors="*{ccCVV}">CC CVV Error</span><br/>
 
     <input type="submit" value="Submit order">
   </form>
