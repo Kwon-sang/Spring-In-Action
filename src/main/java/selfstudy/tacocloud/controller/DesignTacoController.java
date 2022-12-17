@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import selfstudy.tacocloud.domain.Ingredient;
+import selfstudy.tacocloud.domain.Order;
 import selfstudy.tacocloud.domain.Taco;
 import selfstudy.tacocloud.repository.IngredientRepository;
+import selfstudy.tacocloud.repository.TacoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,17 @@ import static selfstudy.tacocloud.domain.Ingredient.*;
 @Slf4j
 @RequestMapping("/design")
 @Controller
+@SessionAttributes("order")
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
 
+    private TacoRepository tacoRepo;
+
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo) {
+    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo) {
         this.ingredientRepo = ingredientRepo;
+        this.tacoRepo = tacoRepo;
     }
 
     @GetMapping
@@ -65,14 +69,29 @@ public class DesignTacoController {
                 .collect(Collectors.toList());
     }
 
+    @ModelAttribute(name = "order")
+    public Order order() {
+        return new Order();
+    }
+
+    @ModelAttribute(name = "taco")
+    public Taco taco() {
+        return new Taco();
+    }
+
     @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors) {
+    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order) {
         if (errors.hasErrors()) {
             return "design";
         }
-
-        /* 여기서 타코디자인(선택된 식자재 내역)을 저장 */
         log.info("[log] Process Design : {}", design);
+
+        Taco saved = tacoRepo.save(design);
+        order.addDesign(saved);
+
         return "redirect:/orders/current";
     }
+
+
+
 }
