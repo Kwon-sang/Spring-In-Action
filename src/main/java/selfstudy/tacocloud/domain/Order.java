@@ -14,10 +14,15 @@ import java.util.List;
 
 @Data
 @Entity
+/*
+In most cases, the name of the table in the database and the name of the entity won't be the same.
+In these cases, we can specify the table name using the @Table annotation:
+ */
 @Table(name = "Taco_Order")
 public class Order implements Serializable {
 
     private final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

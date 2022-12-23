@@ -26,7 +26,6 @@ import static selfstudy.tacocloud.domain.Ingredient.*;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
-
     private TacoRepository tacoRepo;
 
     @Autowired
@@ -37,19 +36,7 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model) {
-        //Temporary Repository
-//        List<Ingredient> ingredients = Arrays.asList(
-//                new Ingredient("FLFO", "Flour Tortilla", Type.WRAP),
-//                new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
-//                new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
-//                new Ingredient("CARN", "Carnitas", Type.PROTEIN),
-//                new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
-//                new Ingredient("LETC", "Lettuce", Type.VEGGIES),
-//                new Ingredient("CHED", "Cheddar", Type.CHEESE),
-//                new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
-//                new Ingredient("SLSA", "Salsa", Type.SAUCE),
-//                new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
-//        );
+        log.info("[Method call] : showDesignForm");
 
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientRepo.findAll().forEach(ingredients::add);
@@ -81,10 +68,11 @@ public class DesignTacoController {
 
     @PostMapping
     public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order) {
+        log.info("[Method call] : processDesign");
+        log.info("designed Taco = {}", design);
         if (errors.hasErrors()) {
             return "design";
         }
-        log.info("[log] Process Design : {}", design);
 
         Taco saved = tacoRepo.save(design);
         order.addDesign(saved);
