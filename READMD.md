@@ -31,4 +31,8 @@
 > ***원인*** : `WebSecurityConfihurerAdapter` : Current Deprecated state
 > 
 > ***해결*** : Spring 공식 문서 참고하여 코드 변경
+
+### 5. User Entity DB저장 오류
+> ***원인*** : user 는 H2 예약어 이므로 사용 할 수 없음
+> ***해결*** : `User` class, `@Entity` -> `@Entity(name = "\"user"\")` 로 변경
  

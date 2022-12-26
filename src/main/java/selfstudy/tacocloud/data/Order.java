@@ -1,4 +1,4 @@
-package selfstudy.tacocloud.domain;
+package selfstudy.tacocloud.data;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
@@ -22,6 +22,9 @@ In these cases, we can specify the table name using the @Table annotation:
 public class Order implements Serializable {
 
     private final long serialVersionUID = 1L;
+
+    @ManyToOne
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

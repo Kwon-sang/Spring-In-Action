@@ -7,17 +7,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import selfstudy.tacocloud.domain.Ingredient;
-import selfstudy.tacocloud.domain.Order;
-import selfstudy.tacocloud.domain.Taco;
+import selfstudy.tacocloud.data.Ingredient;
+import selfstudy.tacocloud.data.Order;
+import selfstudy.tacocloud.data.Taco;
+import selfstudy.tacocloud.data.User;
 import selfstudy.tacocloud.repository.IngredientRepository;
 import selfstudy.tacocloud.repository.TacoRepository;
+import selfstudy.tacocloud.repository.UserRepository;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static selfstudy.tacocloud.domain.Ingredient.*;
+import static selfstudy.tacocloud.data.Ingredient.*;
 
 @Slf4j
 @RequestMapping("/design")
@@ -27,17 +30,17 @@ public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
     private TacoRepository tacoRepo;
+    private UserRepository userRepo;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo) {
+    public DesignTacoController(IngredientRepository ingredientRepo, TacoRepository tacoRepo, UserRepository userRepo) {
         this.ingredientRepo = ingredientRepo;
         this.tacoRepo = tacoRepo;
+        this.userRepo = userRepo;
     }
 
     @GetMapping
-    public String showDesignForm(Model model) {
-        log.info("[Method call] : showDesignForm");
-
+    public String showDesignForm(Model model, Principal principal) {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredientRepo.findAll().forEach(ingredients::add);
 
@@ -45,7 +48,11 @@ public class DesignTacoController {
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
         }
-        model.addAttribute("taco", new Taco());
+
+        String username = principal.getName();
+        User user = userRepo.findByUsername(username);
+        model.addAttribute("user", user);
+
         return "design";
     }
 

@@ -1,7 +1,7 @@
 package selfstudy.tacocloud.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import selfstudy.tacocloud.domain.Order;
+import selfstudy.tacocloud.data.Order;
 
 import java.util.List;
 

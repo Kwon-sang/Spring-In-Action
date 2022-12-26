@@ -3,7 +3,7 @@ package selfstudy.tacocloud.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import selfstudy.tacocloud.domain.Ingredient;
+import selfstudy.tacocloud.data.Ingredient;
 import selfstudy.tacocloud.repository.IngredientRepository;
 
 import java.util.Optional;

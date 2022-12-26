@@ -1,4 +1,4 @@
-package selfstudy.tacocloud.domain;
+package selfstudy.tacocloud.data;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
